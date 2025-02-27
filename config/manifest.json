@@ -1,6 +1,6 @@
 {
-  "name": "My Web App",
-  "short_name": "WebApp",
+  "name": "My APNs App",
+  "short_name": "APNSWebApp",
   "description": "A sample web application demonstrating PWA features.",
   "start_url": "./../index.html",
   "display": "standalone",
