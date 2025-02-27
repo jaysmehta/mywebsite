@@ -1,210 +1,374 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<!-- Google Tag Manager -->
-
-<!-- <script>
-// Check browser support
-if (typeof(Storage) !== "undefined") {
-  // Store
-  let message = [{
-    tab : "all",
-    title : "Welcome To hackathon",
-    body : "This is an intiative by DK",
-    imageurl : "https://s3.envato.com/files/216024394/01_Preview%203.jpg"
-  }];
-  localStorage.setItem("message", JSON.stringify(message));
-  // console.log(localStorage.getItem("message"));
-  var messages = JSON.parse(localStorage.getItem("message"));
-  messages.push({
-    tab : "promotions",
-    title : "Welcome To",
-    body : "This is an by DK",
-    imageurl : "https://s3.envato.com/files/216024394/01_Preview%203.jpg"
-  });
-  localStorage.setItem("message", JSON.stringify(messages));
-
-  // Retrieve
-  // document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-  console.log(localStorage.getItem("message"))
-} else {
-  // document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-}
-</script> -->
-
-
-
-
-
-
-
-<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M2PK5TM');</script> -->
-<!-- End Google Tag Manager -->
-<link rel="manifest" href="/manifest.json">
+    <!-- End Google Tag Manager -->
+    <link rel="manifest" href="/manifest.json" />
     <title>My webpage!</title>
     <link rel="stylesheet" href="styles/styles.css" />
     <script async src="./javascript/index.js"></script>
 
+    <meta name="apple-mobile-web-app-title" content="Your Apple App Title" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/assets/site.webmanifest" />
+
+    <script type="text/javascript">
+
+      function callAddToCart() {
+        clevertap.event.push("Added To Cart");
+      }
+
+      // Get Account id and region from query string
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const accountId = urlParams.get("accountId");
+      const region = urlParams.get("region");
+      const token = urlParams.get("token");
+
+      var clevertap = {
+        event: [],
+        profile: [],
+        account: [],
+        onUserLogin: [],
+        notifications: [],
+        privacy: [],
+      };
+
+      // clevertap.account.push({ id: accountId }, region, "", token);
+      
+      // 🚨🚨🚨🚨 This case is important - because users can send event before clevertap init() 🚨🚨🚨🚨
+      // clevertap.event.push('Test');
+      
+      // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+
+      // Jay demo account
+      // clevertap.account.push({ id: "W6Z-6Z5-975Z" });
+
+      // Staging 4 account
+      // clevertap.account.push({ id: "W67-774-7Z5Z" }, "us1");
+      clevertap.account.push({  id: "KK8-698-5K7Z" }, "sk1-staging-4");
+      // clevertap.account.push({  id: "884-5ZW-8Z7Z" }, "sk1-staging-4");
+
+      // Eu1 Account
+      // clevertap.account.push({ id: "ZWW-WWW-WWRZ" }, "eu1");
+
+      // 🚨🚨🚨🚨 THese 2 should be included in regression - users can opt in for GDPR 🚨🚨🚨🚨
+      // clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
+      // clevertap.privacy.push({ useIP: false });
+
+      
+      // clevertap.event.push("Web Push View", {
+      //   "Product Name": "Product1",
+      //   category: "cat1",
+      //   date_time: new Date("July 03, 2020 09:30:00"),
+      //   cartValue: 10,
+      //   epoch_value: "$D_1594717641",
+      // });
+      // clevertap.event.push("custom html event");
+      // clevertap.onUserLogin.push({
+      //   Site: {
+      //     Name: "Web User",
+      //     Email: "newuser@example.com",
+      //     Identity: "ddsad787dsa34",
+      //     Custom_Tag: "Champion",
+      //   },
+      // });
+      // clevertap.profile.push({"Site":{"Identity":"123qwerty","Email":"abc@example.com","cart_value":50,"Phone":"+919090909090"}});
+      //set the flag to true, if the user agrees to share their IP data
+
+      (function () {
+        var wzrk = document.createElement("script");
+        wzrk.type = "text/javascript";
+        wzrk.async = true;
+        // wzrk.src =
+        //   ("https:" == document.location.protocol
+        //     ? "https://d2r1yp2w7bby2u.cloudfront.net"
+        //     : "http://static.clevertap.com") + "/js/clevertap.min.js";
+        // wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
+        // wzrk.src =
+          // "https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@efe2ff92303c327d3b0a175e873d2f6a3718ce72/clevertap.js";
+        wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@de4ce0e0520c7a17f1fd20cd14ab27ed3131e3f3/clevertap.js';
+        
+        // wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@develop/clevertap.js';
+        // wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk/clevertap.js';
+        // wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wzrk, s);
+      })();
+
+      // var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
+      //  // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
+      // clevertap.account.push({"id": "W6Z-6Z5-975Z"});
+
+      // clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
+      // clevertap.onUserLogin.push({"Site":{"Name":"Web User","Email":"abc@example.com","Identity":"xyz123","Custom_Tag":"Champion"}});//9889
+      // // clevertap.onUserLogin.push({"Site":{"Name":"Web User","Identity":"123qwerty","Custom_Tag":"Champion"}});
+      // // clevertap.event.push("Test ID Event",{"Identity":"43198"});
+      // clevertap.onUserLogin.push({"Site":{"Name":"Jay Mehta","Custom_Tag":"Champion","Identity":"6425","DOB":new Date(1575103663000),"Anniversary":new Date(1575103663000),"Language_Multi":['Tamil','Telgu']}});
+      // clevertap.profile.push({"Site":{"Identity":"6425","My_Key":"My_Value","MSG-push":true}});
+      // // clevertap.event.push("login",{"name":"ct"});
+      // // clevertap.event.push("signup",{"name":"ct"});
+
+      // timeFunction();
+      // // clevertap.profile.push({"Site":{"Identity":"123qwerty","Email":"abc@example.com","cart_value":50}});
+      // clevertap.event.push("Web Push View",{"Product Name":"Product1","category":"cat1","date_time":new Date("July 03, 2020 09:30:00"),"cartValue":10,"epoch_value":"$D_1594717641"});
+      // clevertap.privacy.push({useIP: false}); //set the flag to true, if the user agrees to share their IP data
+      // function timeFunction() {
+      //             setTimeout(function(){ clevertap.event.push("Web Event"); }, 5000);
+      //             clevertap.event.push("Web Event Test");
+      //             // clevertap.profile.push({"Site":{"Custom_Tag":"Champ"}});
+      //         }
+      //  (function () {
+      // 		 var wzrk = document.createElement('script');
+      // 		 wzrk.type = 'text/javascript';
+      // 		 wzrk.async = true;
+      // 		 wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
+      // 		 var s = document.getElementsByTagName('script')[0];
+      // 		 s.parentNode.insertBefore(wzrk, s);
+      //   })();
 
 
-<!-- <script>
-  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var t=analytics.methods[e];analytics[t]=analytics.factory(t)}analytics.load=function(e,t){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+e+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=t};analytics.SNIPPET_VERSION="4.1.0";
-  analytics.load("zRcXZR4HdoWP35650T6VmOXOpTIcT781");
-  analytics.track("From Segement Track");
-  analytics.identify('996633',{name : 'Segment Test',email : 'segment@web.com',Custom_key : 'custome_value',phone:'+919022965224'});
-//   analytics.page("From Segment Page");
-//   analytics.page('Pricing', {
-//   title: 'Segment Pricing',
-//   url: 'https://segment.com/pricing',
-//   path: '/pricing',
-//   referrer: 'https://segment.com/warehouses'
-// });
-  }}();
-</script>  -->
+      clevertap.notifications.push({
+        apnsWebPushId: "web.com.localhost.pushDemo", //only for safari browser
+        apnsWebPushServiceUrl:
+                "https://us-central1-chetan-s-demo-app.cloudfunctions.net/api", //only for safari browser
+        titleText: "Would you like to receive Push Notifications?",
+        bodyText:
+                "We promise to only send you relevant content and give you updates on your transactions",
+        okButtonText: "Sign me up!",
+        rejectButtonText: "No thanks",
+        okButtonColor: "#f28046",
+        hidePoweredByCT: true,
+        serviceWorkerPath: "/clevertap_sw.js",
+      });
 
 
+      function dismissPopup() {
+        // var wrapper = window.parent.document.getElementById('wizParDiv2');
+        // wrapper.remove();
+        // if ('safari' in window && 'pushNotification' in window.safari) {
+        //       var permissionData = window.safari.pushNotification.permission('web.com.localhost.pushDemo');
+        //       checkRemotePermission(permissionData);
+        //   }
 
-<script type="text/javascript">
+        clevertap.notifications.push({
+          apnsWebPushId: "web.com.localhost.pushDemo", //only for safari browser
+          apnsWebPushServiceUrl:
+            "https://us-central1-chetan-s-demo-app.cloudfunctions.net/api", //only for safari browser
+          titleText: "Would you like to receive Push Notifications?",
+          bodyText:
+            "We promise to only send you relevant content and give you updates on your transactions",
+          okButtonText: "Sign me up!",
+          rejectButtonText: "No thanks",
+          okButtonColor: "#f28046",
+          hidePoweredByCT: true,
+          serviceWorkerPath: "/clevertap_sw.js",
+        });
 
-     var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
- // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
-clevertap.account.push({"id": "W6Z-6Z5-975Z"});
-clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
-clevertap.privacy.push({useIP: false}); 
-clevertap.event.push("Web Push View",{"Product Name":"Product1","category":"cat1","date_time":new Date("July 03, 2020 09:30:00"),"cartValue":10,"epoch_value":"$D_1594717641"});
-clevertap.event.push("custom html event");
-clevertap.onUserLogin.push({"Site":{"Name":"Web User","Email":"abc123890456@example.com","Identity":"78901234ABC","Custom_Tag":"Champion"}});
-// clevertap.profile.push({"Site":{"Identity":"123qwerty","Email":"abc@example.com","cart_value":50,"Phone":"+919090909090"}});
-//set the flag to true, if the user agrees to share their IP data
- (function () {
-     var wzrk = document.createElement('script');
-     wzrk.type = 'text/javascript';
-     wzrk.async = true;
-     wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/clevertap.min.js';
-     // wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
-      // wzrk.src = 'https://cdn.jsdelivr.net/gh/CleverTap/clevertap-web-sdk@track_sdk_drop_offs/clevertap.min.js';
-     var s = document.getElementsByTagName('script')[0];
-     s.parentNode.insertBefore(wzrk, s);
-  })();
+        // Notification called with params
+        // on apns
+        // vapid creds added in dashboard
+        // customer opens website
+      }
 
-// var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
-//  // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
-// clevertap.account.push({"id": "W6Z-6Z5-975Z"});
-     
+      //"serviceWorkerPath": "/clevertap_sw.js
+      // var checkRemotePermission = function (permissionData) {
+      //     if (permissionData.permission === 'default') {
+      //         // This is a new web service URL and its validity is unknown.
+      //         window.safari.pushNotification.requestPermission(
+      //             'https://shore-zany-tangelo.glitch.me', // The web service URL.
+      //             'web.com.localhost.pushDemo',     // The Website Push ID.
+      //             {}, // Data that you choose to send to your server to help you identify the user.
+      //             checkRemotePermission         // The callback function.
+      //         );
+      //     }
+      //     else if (permissionData.permission === 'denied') {
+      //       console.log("NO ",permissionData);
+      //         // The user said no.
+      //     }
+      //     else if (permissionData.permission === 'granted') {
+      //         // The web service URL is a valid push provider, and the user said yes.
+      //         // permissionData.deviceToken is now available to use.
+      //         console.log(permissionData.deviceToken);
+      //     }
+      // };
+    </script>
 
-// clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
-// clevertap.onUserLogin.push({"Site":{"Name":"Web User","Email":"abc@example.com","Identity":"xyz123","Custom_Tag":"Champion"}});//9889
-// // clevertap.onUserLogin.push({"Site":{"Name":"Web User","Identity":"123qwerty","Custom_Tag":"Champion"}});
-// // clevertap.event.push("Test ID Event",{"Identity":"43198"});
-// clevertap.onUserLogin.push({"Site":{"Name":"Jay Mehta","Custom_Tag":"Champion","Identity":"6425","DOB":new Date(1575103663000),"Anniversary":new Date(1575103663000),"Language_Multi":['Tamil','Telgu']}});
-// clevertap.profile.push({"Site":{"Identity":"6425","My_Key":"My_Value","MSG-push":true}});
-// // clevertap.event.push("login",{"name":"ct"});
-// // clevertap.event.push("signup",{"name":"ct"});
-
-// timeFunction();
-// // clevertap.profile.push({"Site":{"Identity":"123qwerty","Email":"abc@example.com","cart_value":50}});
-// clevertap.event.push("Web Push View",{"Product Name":"Product1","category":"cat1","date_time":new Date("July 03, 2020 09:30:00"),"cartValue":10,"epoch_value":"$D_1594717641"});
-// clevertap.privacy.push({useIP: false}); //set the flag to true, if the user agrees to share their IP data
-// function timeFunction() {
-//             setTimeout(function(){ clevertap.event.push("Web Event"); }, 5000);
-//             clevertap.event.push("Web Event Test");
-//             // clevertap.profile.push({"Site":{"Custom_Tag":"Champ"}});
-//         }
-//  (function () {
-// 		 var wzrk = document.createElement('script');
-// 		 wzrk.type = 'text/javascript';
-// 		 wzrk.async = true;
-// 		 wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
-// 		 var s = document.getElementsByTagName('script')[0];
-// 		 s.parentNode.insertBefore(wzrk, s);
-//   })();
-
-
-function dismissPopup() {
-	// var wrapper = window.parent.document.getElementById('wizParDiv2');
-	// wrapper.remove();
-  // if ('safari' in window && 'pushNotification' in window.safari) {
-  //       var permissionData = window.safari.pushNotification.permission('web.com.localhost.pushDemo');
-  //       checkRemotePermission(permissionData);
-  //   }
-  
-  clevertap.notifications.push({
-    "apnsWebPushId":"web.com.localhost.pushDemo", //only for safari browser
-    "apnsWebPushServiceUrl":"https://us-central1-chetan-s-demo-app.cloudfunctions.net/api",//only for safari browser
-    "titleText":'Would you like to receive Push Notifications?',
-    "bodyText":'We promise to only send you relevant content and give you updates on your transactions',
-    "okButtonText":'Sign me up!',
-    "rejectButtonText":'No thanks',
-    "okButtonColor":'#f28046',
-    "hidePoweredByCT": true,
-    "serviceWorkerPath": "/clevertap_sw.js"});
-
-}
-//"serviceWorkerPath": "/clevertap_sw.js
-// var checkRemotePermission = function (permissionData) {
-//     if (permissionData.permission === 'default') {
-//         // This is a new web service URL and its validity is unknown.
-//         window.safari.pushNotification.requestPermission(
-//             'https://shore-zany-tangelo.glitch.me', // The web service URL.
-//             'web.com.localhost.pushDemo',     // The Website Push ID.
-//             {}, // Data that you choose to send to your server to help you identify the user.
-//             checkRemotePermission         // The callback function.
-//         );
-//     }
-//     else if (permissionData.permission === 'denied') {
-//       console.log("NO ",permissionData);
-//         // The user said no.
-//     }
-//     else if (permissionData.permission === 'granted') {
-//         // The web service URL is a valid push provider, and the user said yes.
-//         // permissionData.deviceToken is now available to use.
-//         console.log(permissionData.deviceToken);
-//     }
-// };
-
-
-
-
-</script>
   </head>
   <body>
-  	<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2PK5TM"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-M2PK5TM"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
 
-    <h1>singhkunal2050-testing</h1>
-    <h4>Checking changes</h4>
-    <h4 id='date'></h4>
+    <h1>Hello, World!</h1>
 
-    <div class="image-section">
+    <button onclick="callAddToCart()">Push Added To Cart</button>
+
+    <div class="section">
       <div class="section-style">
         <img src="https://picsum.photos/400/200" alt="" />
         <p>A random image courtesy of picsum.com.</p>
-        <a href="page_2.html" target="_self">Visit 2 Page</a>
-        <button class="btn" onclick="dismissPopup()">DISMISS</button>
+        <button class="btn" onclick="dismissPopup()">Setup Web Push</button>
       </div>
-
-      <div class="section-style">
-        <img src="https://picsum.photos/400/200" alt="" />
-        <p>A random image courtesy of picsum.com.</p>
-      </div>
+      <p>To reset permissions clear site data and reset app permissions on mobile</p>
+      <button onclick="clearSiteData()">Clear Site Data</button>
     </div>
 
-    <div class="image-section">
-      <div class="section-style">
-        <img src="https://picsum.photos/400/200" alt="" />
-        <p>A random image courtesy of picsum.com.</p>
-      </div>
+    <code>
+      <button onclick="showClevertapData()">Show Clevertap Data</button>
+      <pre id="clevertap-data">
+      </pre>
+    </code>
 
-      <div class="section-style">
-        <img src="https://picsum.photos/400/200" alt="" />
-        <p>A random image courtesy of picsum.com.</p>
-      </div>
+    <div id="user-agent">
+
     </div>
+    <div id="browser-name">
+
+    </div>
+
+
+    <div id="consoleViewer"></div>
   </body>
+
+  <script>
+
+    (function addUserAgentToPage() {
+      const node = document.querySelector('#user-agent');
+      node.innerHTML = navigator.userAgent;
+    })();
+
+
+    const isChrome = () => {
+      const ua = navigator.userAgent
+      return ua.includes('Chrome') || ua.includes('CriOS')
+    }
+
+    const isFirefox = () => {
+      const ua = navigator.userAgent
+      return ua.includes('Firefox') || ua.includes('FxiOS')
+    }
+
+    const isSafari = () => {
+      const ua = navigator.userAgent
+      // Ignoring the False Positive of Safari on iOS devices because it gives Safari in all Browsers
+      return ua.includes('Safari') &&
+            !ua.includes('CriOS') &&
+            !ua.includes('FxiOS') &&
+            !ua.includes('Chrome') &&
+            !ua.includes('Firefox')
+    }
+
+    (function checkCurrentBrowser() {
+      const node = document.querySelector('#browser-name');
+      let browser = 'NA';
+
+      if(isChrome()){
+        browser='Chrome'
+      } else if(isFirefox()){
+        browser='Firefox'
+      } else if(isSafari()) {
+        browser='safari'
+      }
+
+      node.innerHTML = browser;
+
+    })()
+
+
+    function clearSiteData() {
+      // Clear localStorage
+      localStorage.clear();
+
+      // Clear sessionStorage
+      sessionStorage.clear();
+
+      // Clear cookies
+      document.cookie.split(";").forEach((cookie) => {
+        const name = cookie.split("=")[0].trim();
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      });
+
+      console.log(
+        "Site data cleared: localStorage, sessionStorage, and cookies."
+      );
+    }
+
+    function showClevertapData() {
+      const ctID = clevertap.getCleverTapID();
+      const ctAccount = clevertap.getAccountID();
+      document.getElementById("clevertap-data").innerHTML = `Clevertap ID: ${ctID}\nClevertap Account ID: ${ctAccount}`;
+    }
+
+  //   (function() {
+  //   const logDiv = document.getElementById('log');
+
+  //   const originalConsoleLog = console.log;
+  //   console.log = function(...args) {
+  //     originalConsoleLog(...args); // Keep the original behavior
+  //     const logMessage = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : String(arg))).join(' ');
+  //     const logEntry = document.createElement('div');
+  //     logEntry.textContent = logMessage;
+  //     logDiv.appendChild(logEntry);
+  //   };
+
+  //   // Test it
+  //   console.log('Testing console log redirection!');
+  //   console.log({ key: 'value', anotherKey: 123 });
+  // })();
+
+  (function() {
+      const consoleViewer = document.getElementById('consoleViewer');
+
+      // Helper function to add logs to the viewer
+      function appendToViewer(type, message) {
+        const logEntry = document.createElement('div');
+        logEntry.className = type;
+        logEntry.textContent = `[${type.toUpperCase()}] ${message}`;
+        consoleViewer.appendChild(logEntry);
+
+        // Auto-scroll to the bottom
+        consoleViewer.scrollTop = consoleViewer.scrollHeight;
+      }
+
+      // Methods to override
+      const methods = ['log', 'debug', 'warn', 'error'];
+
+      methods.forEach((method) => {
+        const originalMethod = console[method];
+
+        console[method] = function(...args) {
+          originalMethod.apply(console, args); // Preserve original functionality
+
+          // Format message
+          const formattedMessage = args.map(arg =>
+            typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+          ).join(' ');
+
+          // Append to viewer
+          appendToViewer(method, formattedMessage);
+        };
+      });
+
+    })();
+
+  </script>
 </html>
